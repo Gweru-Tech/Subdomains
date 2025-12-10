@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subdomain Creator - Deploy on Render.com</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-globe"></i>
+                    <span>Subdomain Creator</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#creator" class="nav-link">Create</a>
+                    <a href="#dns" class="nav-link">DNS Config</a>
+                    <a href="#deploy" class="nav-link">Deploy</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Create Custom Subdomains for Render.com</h1>
+                <p>Generate unique subdomains with multiple extensions and automatic DNS forwarding configuration</p>
+                <div class="supported-extensions">
+                    <span class="badge">.net</span>
+                    <span class="badge">.cloud</span>
+                    <span class="badge">.dev</span>
+                    <span class="badge">.online</span>
+                    <span class="badge">.is.dev</span>
+                    <span class="badge">.app</span>
+                    <span class="badge">+15 more</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="creator" class="section">
+            <div class="container">
+                <h2>Create Your Subdomain</h2>
+                <div class="creator-form">
+                    <div class="form-group">
+                        <label for="subdomain">Subdomain Name</label>
+                        <input type="text" id="subdomain" placeholder="Enter your subdomain name">
+                        <div class="input-hint">3-63 characters, letters, numbers, and hyphens only</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="extension">Domain Extension</label>
+                        <select id="extension">
+                            <option value="">Select an extension</option>
+                        </select>
+                    </div>
+
+                    <button id="checkBtn" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Check Availability
+                    </button>
+
+                    <div id="availabilityResult" class="result-box" style="display: none;">
+                        <!-- Results will be displayed here -->
+                    </div>
+                </div>
+
+                <div id="suggestions" class="suggestions" style="display: none;">
+                    <h3>Suggested Alternatives</h3>
+                    <div class="suggestion-list">
+                        <!-- Suggestions will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dns" class="section section-alt">
+            <div class="container">
+                <h2>DNS Forwarding Configuration</h2>
+                <div class="dns-configurator">
+                    <div class="form-group">
+                        <label for="targetUrl">Target URL</label>
+                        <input type="url" id="targetUrl" placeholder="https://your-app.render.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Forwarding Type</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="forwardType" value="301" checked>
+                                <span>301 Permanent Redirect</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="forwardType" value="302">
+                                <span>302 Temporary Redirect</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="forwardType" value="path">
+                                <span>Path Forwarding</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="generateDnsBtn" class="btn btn-secondary">
+                        <i class="fas fa-cog"></i>
+                        Generate DNS Config
+                    </button>
+
+                    <div id="dnsResult" class="dns-result" style="display: none;">
+                        <!-- DNS configuration will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="deploy" class="section">
+            <div class="container">
+                <h2>Deploy on Render.com</h2>
+                <div class="deploy-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Fork this Repository</h3>
+                            <p>Click the fork button on GitHub to create your own copy of this project.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Connect to Render</h3>
+                            <p>Go to Render.com and connect your GitHub account, then select this repository.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Configure Environment</h3>
+                            <p>Set your environment variables and click "Create Web Service".</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Add Custom Domain</h3>
+                            <p>In Render dashboard, add your custom domain and update DNS records.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="deploy-info">
+                    <h3>Render Configuration</h3>
+                    <div class="config-code">
+                        <pre><code># render.yaml
+services:
+  - type: web
+    name: subdomain-creator
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Subdomain Creator. Built for Render.com deployment.</p>
+            <div class="footer-links">
+                <a href="https://render.com" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    Render.com
+                </a>
+                <a href="https://github.com" target="_blank">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/scripts/main.js"></script>
+</body>
+</html>
