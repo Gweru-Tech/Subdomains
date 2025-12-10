@@ -1,0 +1,56 @@
+services:
+  # Main web service
+  - type: web
+    name: subdomain-creator
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+    # Auto-deploy on push to main branch
+    autoDeploy: true
+    
+    # Headers for security
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-XSS-Protection
+        value: 1; mode=block
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+
+# Environment variables for different environments
+environments:
+  production:
+    - key: NODE_ENV
+      value: production
+    - key: PORT
+      value: 10000
+  
+  preview:
+    - key: NODE_ENV
+      value: staging
+    - key: PORT
+      value: 10000
+
+# Custom domains configuration (users will add their own)
+# Example: users would add their custom domain in Render dashboard
+# and then update their DNS records accordingly
+
+# Redirect rules for SEO
+redirects:
+  - source: /index.html
+    destination: /
+    type: 301
+  - source: /home
+    destination: /
+    type: 301

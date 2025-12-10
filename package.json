@@ -1,0 +1,27 @@
+{
+  "name": "subdomain-creator",
+  "version": "1.0.0",
+  "description": "A comprehensive subdomain creator site for Render.com deployment with DNS forwarding support",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build": "echo 'Build completed'"
+  },
+  "keywords": ["subdomain", "dns", "render", "domain", "forwarding"],
+  "author": "SuperNinja",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
